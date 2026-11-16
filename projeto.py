@@ -1,9 +1,6 @@
-import os
-arq = "informacoes.txt"
-ref_arq = open(arq, "w")
+arq = "artistas.txt"
 
-def informacoesArtista(): # Nicolas
-    artista = []
+def informacoesArtista(artista): # Nicolas
     cpf = input("Digite o CPF do Artista:  ")
     artista.append(cpf)
 
@@ -25,26 +22,28 @@ def informacoesArtista(): # Nicolas
     redeSocial = input("Digite a o @ do Artista nas redes sociais (@artista - Instagram): ")
     artista.append(redeSocial)
 
-    condicao = False
+    with open(arq, "a", encoding="utf-8") as arquivo:
+        arquivo.write(";".join(artista) + "\n")
+
     return artista
 
 def artistas(lista): # Nicolas
     pergunta = input("Quer adicionar um artista? (1-sim, 2-não): ")
     if pergunta == "1":
-        condicao = True
-        while condicao:
+        while True:
             print("=============ADICIONAR O ARTISTA===========?")
-            condicao = False
-            informacoesArtista()
+            informacoesArtista(lista)
 
         if lista:
-            for i in len(lista()):
-                print(lista[i])
+            for i in range(len(lista)):
+                print(lista[i], end='; ')
+                
         else:
             print("Lista vazia!")
 
     elif pergunta == "2":
         print("Lista vazia!")
+        break
         
 lista = []
 artistas(lista)
