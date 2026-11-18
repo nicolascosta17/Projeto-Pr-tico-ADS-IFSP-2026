@@ -1,9 +1,9 @@
 import os
 
 
-# ===== MENU E SUBMENUS - William Rosales =====
+# ===== MENU E SUBMENUS - William =====
 
-def main():  # William Rosales
+def main():  # William
     arqArtistas = "artistas.txt"
     arqObras = "obras.txt"
     arqColaboracoes = "colaboracoes.txt"
@@ -37,7 +37,7 @@ def main():  # William Rosales
             print("Opção inválida!")
 
 
-def mostrarSubmenu(nome):  # William Rosales
+def mostrarSubmenu(nome):  # William
     print()
     print("-----", nome, "-----")
     print("1. Listar todos")
@@ -48,7 +48,7 @@ def mostrarSubmenu(nome):  # William Rosales
     print("6. Voltar")
 
 
-def menuArtistas(artistas, nomeArquivo):  # William Rosales
+def menuArtistas(artistas, nomeArquivo):  # William
     while True:
         mostrarSubmenu("ARTISTAS")
         opcao = input("Opção: ")
@@ -68,7 +68,7 @@ def menuArtistas(artistas, nomeArquivo):  # William Rosales
             print("Opção inválida!")
 
 
-def menuObras(obras, nomeArquivo):  # William Rosales
+def menuObras(obras, nomeArquivo):  # William
     while True:
         mostrarSubmenu("OBRAS")
         opcao = input("Opção: ")
@@ -88,7 +88,7 @@ def menuObras(obras, nomeArquivo):  # William Rosales
             print("Opção inválida!")
 
 
-def menuColaboracoes(colaboracoes, artistas, obras, nomeArquivo):  # William Rosales
+def menuColaboracoes(colaboracoes, artistas, obras, nomeArquivo):  # William
     while True:
         mostrarSubmenu("COLABORAÇÕES")
         opcao = input("Opção: ")
@@ -108,7 +108,7 @@ def menuColaboracoes(colaboracoes, artistas, obras, nomeArquivo):  # William Ros
             print("Opção inválida!")
 
 
-def menuRelatorios(artistas, obras, colaboracoes):  # William Rosales
+def menuRelatorios(artistas, obras, colaboracoes):  # William
     while True:
         print()
         print("----- RELATÓRIOS -----")
