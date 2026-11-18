@@ -10,9 +10,9 @@ def main():
     obras = carregarObras(arqObras)
     colaboracoes = carregarColaboracoes(arqColaboracoes)
 
-    opcao = ""
-    while opcao != "5":
-        print("\n===== MENU PRINCIPAL =====")
+    while True:
+        print()
+        print("===== MENU PRINCIPAL =====")
         print("1. Submenu de Artista")
         print("2. Submenu de Obra")
         print("3. Submenu de Colaboração")
@@ -30,6 +30,7 @@ def main():
             menuRelatorios(artistas, obras, colaboracoes)
         elif opcao == "5":
             print("Saindo...")
+            break
         else:
             print("Opção inválida!")
 
@@ -79,7 +80,8 @@ def lerTipo():
 
 
 def mostrarSubmenu(nome):
-    print("\n----- " + nome + " -----")
+    print()
+    print("-----", nome, "-----")
     print("1. Listar todos")
     print("2. Listar um")
     print("3. Incluir")
@@ -105,7 +107,9 @@ def carregarArtistas(nomeArquivo):
 def salvarArtistas(artistas, nomeArquivo):
     arquivo = open(nomeArquivo, "w", encoding="utf-8")
     for a in artistas:
-        arquivo.write(a[0] + ";" + a[1] + ";" + ",".join(a[2]) + ";" + a[3] + ";" + a[4] + ";" + a[5] + ";" + ",".join(a[6]) + "\n")
+        telefones = ",".join(a[2])
+        redes = ",".join(a[6])
+        arquivo.write(a[0] + ";" + a[1] + ";" + telefones + ";" + a[3] + ";" + a[4] + ";" + a[5] + ";" + redes + "\n")
     arquivo.close()
 
 
@@ -169,8 +173,7 @@ def buscarColaboracao(colaboracoes, cpf, codigo):
 
 
 def menuArtistas(artistas, nomeArquivo):
-    opcao = ""
-    while opcao != "6":
+    while True:
         mostrarSubmenu("ARTISTAS")
         opcao = input("Opção: ")
         if opcao == "1":
@@ -183,7 +186,9 @@ def menuArtistas(artistas, nomeArquivo):
             alterarArtista(artistas, nomeArquivo)
         elif opcao == "5":
             excluirArtista(artistas, nomeArquivo)
-        elif opcao != "6":
+        elif opcao == "6":
+            break
+        else:
             print("Opção inválida!")
 
 
@@ -238,7 +243,7 @@ def alterarArtista(artistas, nomeArquivo):
         return
     a = artistas[pos]
     mostrarArtista(a)
-    print("\nDigite os novos dados (Enter para manter):")
+    print("Digite os novos dados (Enter para manter):")
     novo = input("Nome: ")
     if novo != "":
         a[1] = novo
@@ -266,7 +271,8 @@ def excluirArtista(artistas, nomeArquivo):
         print("Artista não encontrado!")
         return
     mostrarArtista(artistas[pos])
-    if input("Confirma a exclusão? (s/n): ") == "s":
+    resposta = input("Confirma a exclusão? (s/n): ")
+    if resposta == "s":
         del artistas[pos]
         salvarArtistas(artistas, nomeArquivo)
         print("Artista excluído!")
@@ -275,8 +281,7 @@ def excluirArtista(artistas, nomeArquivo):
 
 
 def menuObras(obras, nomeArquivo):
-    opcao = ""
-    while opcao != "6":
+    while True:
         mostrarSubmenu("OBRAS")
         opcao = input("Opção: ")
         if opcao == "1":
@@ -289,7 +294,9 @@ def menuObras(obras, nomeArquivo):
             alterarObra(obras, nomeArquivo)
         elif opcao == "5":
             excluirObra(obras, nomeArquivo)
-        elif opcao != "6":
+        elif opcao == "6":
+            break
+        else:
             print("Opção inválida!")
 
 
@@ -344,7 +351,7 @@ def alterarObra(obras, nomeArquivo):
         return
     o = obras[pos]
     mostrarObra(o)
-    print("\nDigite os novos dados (Enter para manter):")
+    print("Digite os novos dados (Enter para manter):")
     novo = input("Título: ")
     if novo != "":
         o[1] = novo
@@ -370,7 +377,8 @@ def excluirObra(obras, nomeArquivo):
         print("Obra não encontrada!")
         return
     mostrarObra(obras[pos])
-    if input("Confirma a exclusão? (s/n): ") == "s":
+    resposta = input("Confirma a exclusão? (s/n): ")
+    if resposta == "s":
         del obras[pos]
         salvarObras(obras, nomeArquivo)
         print("Obra excluída!")
@@ -379,8 +387,7 @@ def excluirObra(obras, nomeArquivo):
 
 
 def menuColaboracoes(colaboracoes, artistas, obras, nomeArquivo):
-    opcao = ""
-    while opcao != "6":
+    while True:
         mostrarSubmenu("COLABORAÇÕES")
         opcao = input("Opção: ")
         if opcao == "1":
@@ -393,7 +400,9 @@ def menuColaboracoes(colaboracoes, artistas, obras, nomeArquivo):
             alterarColaboracao(colaboracoes, nomeArquivo)
         elif opcao == "5":
             excluirColaboracao(colaboracoes, nomeArquivo)
-        elif opcao != "6":
+        elif opcao == "6":
+            break
+        else:
             print("Opção inválida!")
 
 
@@ -454,7 +463,7 @@ def alterarColaboracao(colaboracoes, nomeArquivo):
         return
     c = colaboracoes[pos]
     mostrarColaboracao(c)
-    print("\nDigite os novos dados (Enter para manter):")
+    print("Digite os novos dados (Enter para manter):")
     novo = input("Papel: ")
     if novo != "":
         c[2] = novo
@@ -479,7 +488,8 @@ def excluirColaboracao(colaboracoes, nomeArquivo):
         print("Colaboração não encontrada!")
         return
     mostrarColaboracao(colaboracoes[pos])
-    if input("Confirma a exclusão? (s/n): ") == "s":
+    resposta = input("Confirma a exclusão? (s/n): ")
+    if resposta == "s":
         del colaboracoes[pos]
         salvarColaboracoes(colaboracoes, nomeArquivo)
         print("Colaboração excluída!")
@@ -488,9 +498,9 @@ def excluirColaboracao(colaboracoes, nomeArquivo):
 
 
 def menuRelatorios(artistas, obras, colaboracoes):
-    opcao = ""
-    while opcao != "4":
-        print("\n----- RELATÓRIOS -----")
+    while True:
+        print()
+        print("----- RELATÓRIOS -----")
         print("1. Obras de um artista")
         print("2. Obras de um tipo")
         print("3. Colaborações entre duas datas")
@@ -502,7 +512,9 @@ def menuRelatorios(artistas, obras, colaboracoes):
             relatorioObrasTipo(artistas, obras, colaboracoes)
         elif opcao == "3":
             relatorioColaboracoesPeriodo(artistas, obras, colaboracoes)
-        elif opcao != "4":
+        elif opcao == "4":
+            break
+        else:
             print("Opção inválida!")
 
 
@@ -525,13 +537,15 @@ def relatorioObrasArtista(artistas, obras, colaboracoes):
     linhas.append("Artista: " + artistas[pos][1])
     linhas.append("Redes sociais: " + ", ".join(artistas[pos][6]))
     linhas.append("Obras:")
+    achou = False
     for c in colaboracoes:
         if c[0] == cpf:
             posObra = buscarObra(obras, c[1])
             if posObra != -1:
                 o = obras[posObra]
                 linhas.append("- " + o[0] + " | " + o[1] + " | " + o[2] + " | " + o[3] + " | " + o[4] + " | R$ " + o[5])
-    if len(linhas) == 3:
+                achou = True
+    if not achou:
         linhas.append("Nenhuma obra encontrada.")
     salvarRelatorio(linhas, "relatorio_a.txt")
 
@@ -540,6 +554,7 @@ def relatorioObrasTipo(artistas, obras, colaboracoes):
     tipo = lerTipo()
     linhas = []
     linhas.append("Obras do tipo " + tipo + ":")
+    achou = False
     for o in obras:
         if o[3] == tipo:
             nomes = []
@@ -550,7 +565,8 @@ def relatorioObrasTipo(artistas, obras, colaboracoes):
                         nomes.append(artistas[posArtista][1])
             linhas.append("- " + o[0] + " | " + o[1] + " | " + o[2] + " | " + o[4] + " | R$ " + o[5])
             linhas.append("  Artista(s): " + ", ".join(nomes))
-    if len(linhas) == 1:
+            achou = True
+    if not achou:
         linhas.append("Nenhuma obra encontrada.")
     salvarRelatorio(linhas, "relatorio_b.txt")
 
@@ -562,6 +578,7 @@ def relatorioColaboracoesPeriodo(artistas, obras, colaboracoes):
     fim = dataParaNumero(dataY)
     linhas = []
     linhas.append("Colaborações entre " + dataX + " e " + dataY + ":")
+    achou = False
     for c in colaboracoes:
         entrada = dataParaNumero(c[4])
         if entrada >= inicio and entrada <= fim:
@@ -574,7 +591,8 @@ def relatorioColaboracoesPeriodo(artistas, obras, colaboracoes):
             if posObra != -1:
                 tituloObra = obras[posObra][1]
             linhas.append("- " + nomeArtista + " | " + tituloObra + " | " + c[2] + " | " + c[3] + "%")
-    if len(linhas) == 1:
+            achou = True
+    if not achou:
         linhas.append("Nenhuma colaboração encontrada.")
     salvarRelatorio(linhas, "relatorio_c.txt")
 
